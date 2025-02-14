@@ -8,19 +8,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333;
+            --input-bg: #f4f4f4;
+            --input-border: #ccc;
+            --button-bg: #0088cc;
+            --button-hover: #0077b6;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: var(--bg-color);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            background: white;
+            background: var(--bg-color);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -29,7 +38,7 @@
         }
         h2 {
             margin-bottom: 15px;
-            color: #333;
+            color: var(--text-color);
         }
         .input-group {
             text-align: left;
@@ -37,7 +46,7 @@
         }
         label {
             font-size: 16px;
-            color: #555;
+            color: var(--text-color);
             display: block;
             margin-bottom: 5px;
         }
@@ -45,14 +54,16 @@
             font-size: 16px;
             padding: 10px;
             width: 100%;
-            border: 1px solid #ccc;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
             border-radius: 5px;
             box-sizing: border-box;
+            color: var(--text-color);
         }
         button {
             font-size: 18px;
             padding: 12px;
-            background-color: #0088cc;
+            background-color: var(--button-bg);
             color: white;
             border: none;
             cursor: pointer;
@@ -62,7 +73,7 @@
             transition: background 0.3s;
         }
         button:hover {
-            background-color: #0077b6;
+            background-color: var(--button-hover);
         }
     </style>
 </head>
@@ -84,6 +95,15 @@
                 time_24hr: true,
                 defaultDate: new Date(),
             });
+            
+            // Проверка темы Telegram и изменение цветов
+            const theme = Telegram.WebApp.colorScheme;
+            if (theme === "dark") {
+                document.documentElement.style.setProperty('--bg-color', '#1e1e1e');
+                document.documentElement.style.setProperty('--text-color', '#ffffff');
+                document.documentElement.style.setProperty('--input-bg', '#333333');
+                document.documentElement.style.setProperty('--input-border', '#555555');
+            }
         });
         
         function submitData() {
